@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MORRIS WANYOIKE KAMANDE - Computer Science Specialist & Tech Solutions</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandAccent: '#00E5FF',
+                        brandAccentHover: '#00B8D4',
+                        brandDark: '#060A12',
+                        brandCard: '#0D1424',
+                        brandCardLight: '#17223B',
+                        brandSecondary: '#3B82F6',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #060A12;
+            background-image: 
+                radial-gradient(circle at 15% 20%, rgba(0, 229, 255, 0.12) 0%, transparent 45%),
+                radial-gradient(circle at 85% 65%, rgba(59, 130, 246, 0.10) 0%, transparent 45%),
+                radial-gradient(circle at 50% 50%, rgba(13, 20, 36, 1) 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Custom Hero Avatar / Glow */
+        .hero-blob {
+            background: linear-gradient(135deg, #00E5FF 0%, #3B82F6 100%);
+            border-radius: 40% 60% 70% 30% / 50% 50% 50% 50%;
+            box-shadow: 0 0 60px rgba(0, 229, 255, 0.35);
+            animation: morph 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes morph {
+            0% { border-radius: 40% 60% 70% 30% / 50% 50% 50% 50%; }
+            100% { border-radius: 60% 40% 30% 70% / 40% 60% 60% 40%; }
+        }
+
+        .floating {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .floating-delayed {
+            animation: float 4s ease-in-out 2s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .glow-text {
+            text-shadow: 0 0 18px rgba(0, 229, 255, 0.5);
+        }
+
+        /* Glassmorphism utility */
+        .glass-card {
+            background: rgba(13, 20, 36, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(0, 229, 255, 0.4);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #060A12;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #17223B;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00E5FF;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-brandAccent selection:text-black font-sans antialiased">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="w-full py-4 px-6 md:px-12 flex justify-between items-center z-50 sticky top-0 border-b border-white/10 backdrop-blur-xl bg-brandDark/85">
+        <!-- Brand Logo -->
+        <a href="#home" class="flex items-center space-x-3 group">
+            <div class="w-10 h-10 rounded-xl bg-brandAccent/20 border border-brandAccent flex items-center justify-center text-brandAccent group-hover:bg-brandAccent group-hover:text-black transition-all duration-300">
+                <i class="fa-solid fa-code text-lg"></i>
+            </div>
+            <div class="flex flex-col">
+                <span class="text-lg md:text-xl font-black tracking-wider text-white">MORRIS <span class="text-brandAccent">KAMANDE</span></span>
+                <span class="text-[10px] text-gray-400 tracking-widest font-semibold uppercase -mt-1">Computer Scientist</span>
+            </div>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden lg:flex items-center space-x-7 font-semibold text-xs tracking-wider uppercase">
+            <a href="#home" class="text-brandAccent hover:text-brandAccent transition-colors">Home</a>
+            <a href="#about" class="text-gray-300 hover:text-brandAccent transition-colors">About</a>
+            <a href="#skills" class="text-gray-300 hover:text-brandAccent transition-colors">Skills</a>
+            <a href="#experience" class="text-gray-300 hover:text-brandAccent transition-colors">Experience</a>
+            <a href="#education" class="text-gray-300 hover:text-brandAccent transition-colors">Education & Certs</a>
+            <a href="#competencies" class="text-gray-300 hover:text-brandAccent transition-colors">Competencies</a>
+            <a href="#contact" class="bg-brandAccent hover:bg-brandAccentHover text-black px-5 py-2.5 rounded-xl font-bold transition-all shadow-lg shadow-brandAccent/20">Contact Me</a>
+        </nav>
+
+        <!-- Mobile Menu Button -->
+        <button id="menu-btn" class="lg:hidden text-white text-2xl focus:outline-none p-2 rounded-lg bg-white/5 border border-white/10">
+            <i class="fa-solid fa-bars" id="menu-icon"></i>
+        </button>
+    </header>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-brandDark/95 border-b border-white/10 px-6 py-5 space-y-4 z-40 fixed w-full top-[73px] backdrop-blur-2xl shadow-2xl transition-all">
+        <a href="#home" class="block text-brandAccent font-semibold py-1 mobile-link">HOME</a>
+        <a href="#about" class="block text-gray-300 hover:text-brandAccent font-semibold py-1 mobile-link">ABOUT</a>
+        <a href="#skills" class="block text-gray-300 hover:text-brandAccent font-semibold py-1 mobile-link">SKILLS</a>
+        <a href="#experience" class="block text-gray-300 hover:text-brandAccent font-semibold py-1 mobile-link">EXPERIENCE</a>
+        <a href="#education" class="block text-gray-300 hover:text-brandAccent font-semibold py-1 mobile-link">EDUCATION & CERTS</a>
+        <a href="#competencies" class="block text-gray-300 hover:text-brandAccent font-semibold py-1 mobile-link">COMPETENCIES</a>
+        <a href="#contact" class="block text-center bg-brandAccent hover:bg-brandAccentHover text-black font-bold py-3 rounded-xl mobile-link">GET IN TOUCH</a>
+    </div>
+
+    <!-- MAIN HERO SECTION -->
+    <main id="home" class="flex-grow flex items-center justify-center relative px-4 sm:px-8 py-12 md:py-24 max-w-7xl mx-auto w-full">
+        
+        <!-- Floating Badge 1: Qualification Badge (Top Left) -->
+        <div class="hidden lg:flex items-center space-x-3 absolute left-4 top-16 floating glass-card p-3.5 rounded-2xl shadow-2xl max-w-xs">
+            <div class="w-12 h-12 rounded-xl bg-brandAccent/20 flex items-center justify-center text-brandAccent text-xl border border-brandAccent/30 shrink-0">
+                <i class="fa-solid fa-user-graduate"></i>
+            </div>
+            <div>
+                <p class="text-[10px] uppercase font-bold text-gray-400">Education</p>
+                <p class="text-white font-extrabold text-xs tracking-wide">B.Sc. Computer Science</p>
+                <p class="text-[11px] text-brandAccent font-semibold">Karatina University</p>
+            </div>
+        </div>
+
+        <!-- Floating Badge 2: Certifications Badge (Bottom Left) -->
+        <div class="hidden lg:flex items-center space-x-3 absolute left-6 bottom-16 floating-delayed glass-card p-3.5 rounded-2xl shadow-2xl max-w-xs cursor-pointer hover:scale-105 transition-transform" onclick="scrollToSection('education')">
+            <div class="w-10 h-10 rounded-xl bg-blue-500/20 flex items-center justify-center text-blue-400 text-lg border border-blue-500/30 shrink-0">
+                <i class="fa-solid fa-cloud"></i>
+            </div>
+            <div>
+                <p class="text-[10px] uppercase font-bold text-gray-400">Google Cloud & Python</p>
+                <p class="text-white font-bold text-xs">Coursera Certified</p>
+            </div>
+        </div>
+
+        <!-- Floating Badge 3: Key Expertise Card (Top Right) -->
+        <div class="hidden xl:block absolute right-4 top-16 floating-delayed glass-card p-4 rounded-2xl shadow-2xl max-w-xs">
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] uppercase tracking-wider text-brandAccent font-bold"><i class="fa-solid fa-bolt mr-1"></i> Core Stack</span>
+                <span class="flex h-2 w-2 rounded-full bg-emerald-400"></span>
+            </div>
+            <p class="text-xs text-gray-200 font-semibold mb-2">System Development & AI / Machine Learning Solutions</p>
+            <div class="flex flex-wrap gap-1.5">
+                <span class="text-[10px] bg-white/10 text-gray-300 px-2 py-0.5 rounded-md">Python</span>
+                <span class="text-[10px] bg-white/10 text-gray-300 px-2 py-0.5 rounded-md">AI / ML</span>
+                <span class="text-[10px] bg-white/10 text-gray-300 px-2 py-0.5 rounded-md">Web Dev</span>
+                <span class="text-[10px] bg-white/10 text-gray-300 px-2 py-0.5 rounded-md">Graphics</span>
+            </div>
+        </div>
+
+        <!-- Floating Badge 4: Contact/Availability (Bottom Right) -->
+        <div class="hidden xl:flex items-center space-x-3 absolute right-6 bottom-16 glass-card p-3.5 rounded-2xl shadow-2xl border border-white/10 cursor-pointer hover:border-brandAccent transition-all" onclick="scrollToSection('contact')">
+            <div class="w-10 h-10 rounded-xl bg-emerald-500/20 flex items-center justify-center text-emerald-400 font-bold text-lg border border-emerald-500/30 shrink-0">
+                <i class="fa-solid fa-headset"></i>
+            </div>
+            <div>
+                <p class="text-[10px] font-bold uppercase text-gray-400">Available For Projects</p>
+                <p class="text-xs font-black text-white">+254 723 110 915</p>
+            </div>
+        </div>
+
+        <!-- Central Hero Content -->
+        <div class="flex flex-col items-center text-center z-10 max-w-4xl mx-auto px-2">
+            
+            <!-- Blob Container with Avatar Graphic -->
+     <div class="relative mb-8">
+    <div class="absolute -inset-3 hero-blob opacity-70 blur-lg"></div>
+    <div class="relative w-48 h-48 sm:w-60 sm:h-60 rounded-full overflow-hidden border-4 border-brandAccent/60 shadow-2xl flex items-center justify-center bg-brandDark group">
+        <!-- Local Profile Image -->
+        <img 
+            src="grd.jpeg" 
+            alt="Morris Wanyoike Kamande" 
+            class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+        />
+    </div>
+</div>
+
+            <!-- Name Heading -->
+            <div class="inline-flex items-center space-x-2 bg-brandAccent/10 border border-brandAccent/30 px-4 py-1.5 rounded-full mb-4">
+                <span class="w-2 h-2 rounded-full bg-brandAccent animate-ping"></span>
+                <span class="text-xs font-bold tracking-widest text-brandAccent uppercase">Computer Science Graduate & IT Innovator</span>
+            </div>
+
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white mb-4 uppercase leading-tight">
+                MORRIS WANYOIKE <span class="text-brandAccent glow-text">KAMANDE</span>
+            </h1>
+
+            <h2 class="text-sm sm:text-lg md:text-xl font-medium text-gray-300 tracking-wide max-w-2xl mb-8 leading-relaxed">
+                Software Developer • AI & Machine Learning Specialist • Graphics Designer • IT & Database Administrator
+            </h2>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-wrap items-center justify-center gap-4 mb-10">
+                <a href="#contact" class="bg-brandAccent hover:bg-brandAccentHover text-black font-black px-8 py-3.5 rounded-xl shadow-lg shadow-brandAccent/30 hover:scale-105 transition-all text-sm tracking-wide">
+                    <i class="fa-solid fa-paper-plane mr-2"></i> Get In Touch
+                </a>
+                <a href="#experience" class="bg-brandCardLight hover:bg-brandCard text-white border border-white/10 font-bold px-8 py-3.5 rounded-xl shadow-lg hover:scale-105 transition-all text-sm tracking-wide">
+                    <i class="fa-solid fa-briefcase mr-2"></i> View Experience
+                </a>
+            </div>
+
+            <!-- Contact Quick Line -->
+            <div class="flex flex-wrap items-center justify-center gap-6 text-xs text-gray-400 font-medium">
+                <a href="tel:+254723110915" class="hover:text-brandAccent transition-colors flex items-center gap-1.5">
+                    <i class="fa-solid fa-phone text-brandAccent"></i> +254 723 110 915
+                </a>
+                <span class="hidden sm:inline text-white/20">•</span>
+                <a href="mailto:kamandem76@gmail.com" class="hover:text-brandAccent transition-colors flex items-center gap-1.5">
+                    <i class="fa-solid fa-envelope text-brandAccent"></i> kamandem76@gmail.com
+                </a>
+                <span class="hidden sm:inline text-white/20">•</span>
+                <span class="flex items-center gap-1.5">
+                    <i class="fa-solid fa-location-dot text-brandAccent"></i> Murang'a, Kenya
+                </span>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- SECTION 2: ABOUT & CAREER OBJECTIVE -->
+    <section id="about" class="py-20 px-6 max-w-7xl mx-auto w-full border-t border-white/10">
+        <div class="text-center mb-16">
+            <span class="text-brandAccent font-bold uppercase tracking-widest text-xs">Profile Overview</span>
+            <h2 class="text-3xl md:text-4xl font-extrabold mt-1 text-white">About Morris Kamande</h2>
+            <div class="w-16 h-1 bg-brandAccent mx-auto mt-3 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+            
+            <!-- Professional Summary Card -->
+            <div class="lg:col-span-7 glass-card p-8 rounded-3xl border border-white/10 shadow-2xl flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-12 h-12 rounded-2xl bg-brandAccent/20 flex items-center justify-center text-brandAccent text-xl border border-brandAccent/30">
+                            <i class="fa-solid fa-user-check"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Professional Summary</h3>
+                            <p class="text-xs text-brandAccent">Computer Science Specialist</p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-gray-300 leading-relaxed text-sm md:text-base mb-6">
+                        A dedicated <strong class="text-white">Computer Science graduate from Karatina University</strong> with a solid foundation in software development, information systems, and modern IT solutions. Proficient in leveraging technology to solve real-world problems, with strong skills in programming, system analysis, and data management.
+                    </p>
+                    <p class="text-gray-300 leading-relaxed text-sm md:text-base mb-6">
+                        Experienced in generating efficient technical solutions and delivering timely results through contemporary IT tools and methodologies. Guided by integrity, accountability, and a collaborative mindset, I excel in dynamic and competitive environments committed to driving technological innovation.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-6 border-t border-white/10">
+                    <div class="border-l-2 border-brandAccent pl-3">
+                        <p class="text-lg font-black text-white">B.Sc. CS</p>
+                        <p class="text-[11px] text-gray-400 uppercase font-semibold">Karatina Univ</p>
+                    </div>
+                    <div class="border-l-2 border-brandAccent pl-3">
+                        <p class="text-lg font-black text-white">Google Cloud</p>
+                        <p class="text-[11px] text-gray-400 uppercase font-semibold">ML Certified</p>
+                    </div>
+                    <div class="border-l-2 border-brandAccent pl-3 col-span-2 sm:col-span-1">
+                        <p class="text-lg font-black text-white">Python</p>
+                        <p class="text-[11px] text-gray-400 uppercase font-semibold">Specialist</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Career Objective & Core Values -->
+            <div class="lg:col-span-5 glass-card p-8 rounded-3xl border border-white/10 shadow-2xl flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-12 h-12 rounded-2xl bg-blue-500/20 flex items-center justify-center text-blue-400 text-xl border border-blue-500/30">
+                            <i class="fa-solid fa-bullseye"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Career Objective</h3>
+                            <p class="text-xs text-blue-400">Goals & Vision</p>
+                        </div>
+                    </div>
+
+                    <p class="text-gray-300 leading-relaxed text-sm md:text-base mb-6">
+                        To apply my expertise in computer science and innovative IT solutions in a dynamic role that supports continuous learning, fosters problem-solving, and drives excellence.
+                    </p>
+                    <p class="text-gray-300 leading-relaxed text-sm md:text-base mb-6">
+                        I aim to contribute to organizational growth through integrity, accountability, and the development of impactful technological solutions that advance both the organization and the wider community.
+                    </p>
+                </div>
+
+                <!-- Core Pillars -->
+                <div class="space-y-3 pt-4 border-t border-white/10">
+                    <div class="flex items-center space-x-3 text-xs font-semibold text-gray-200">
+                        <i class="fa-solid fa-circle-check text-brandAccent"></i>
+                        <span>Integrity & Professional Accountability</span>
+                    </div>
+                    <div class="flex items-center space-x-3 text-xs font-semibold text-gray-200">
+                        <i class="fa-solid fa-circle-check text-brandAccent"></i>
+                        <span>Continuous Technological Innovation</span>
+                    </div>
+                    <div class="flex items-center space-x-3 text-xs font-semibold text-gray-200">
+                        <i class="fa-solid fa-circle-check text-brandAccent"></i>
+                        <span>Community & Organizational Growth</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 3: KEY TECHNICAL SKILLS -->
+    <section id="skills" class="py-20 px-6 max-w-7xl mx-auto w-full border-t border-white/10">
+        <div class="text-center mb-16">
+            <span class="text-brandAccent font-bold uppercase tracking-widest text-xs">Technical Arsenal</span>
+            <h2 class="text-3xl md:text-4xl font-extrabold mt-1 text-white">Key Skills & Capabilities</h2>
+            <div class="w-16 h-1 bg-brandAccent mx-auto mt-3 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <!-- Skill 1 -->
+            <div class="glass-card p-6 rounded-2xl border border-white/10 hover:border-brandAccent transition-all group">
+                <div class="w-12 h-12 rounded-xl bg-brandAccent/20 flex items-center justify-center text-brandAccent text-xl mb-4 group-hover:bg-brandAccent group-hover:text-black transition-all">
+                    <i class="fa-solid fa-globe"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-2">Web Design & Maintenance</h3>
+                <p class="text-gray-400 text-xs leading-relaxed">
+                    Designing, developing, and maintaining responsive, accessible, and functional web applications.
+                </p>
+            </div>
+
+            <!-- Skill 2 -->
+            <div class="glass-card p-6 rounded-2xl border border-white/10 hover:border-brandAccent transition-all group">
+                <div class="w-12 h-12 rounded-xl bg-brandAccent/20 flex items-center justify-center text-brandAccent text-xl mb-4 group-hover:bg-brandAccent group-hover:text-black transition-all">
+                    <i class="fa-solid fa-diagram-project"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-2">System Design & Dev</h3>
+                <p class="text-gray-400 text-xs leading-relaxed">
+                    Creating and implementing efficient software systems tailored precisely to user and business requirements.
+                </p>
+            </div>
+
+            <!-- Skill 3 -->
+            <div class="glass-card p-6 rounded-2xl border border-white/10 hover:border-brandAccent transition-all group">
+                <div class="w-12 h-12 rounded-xl bg-brandAccent/20 flex items-center justify-center text-brandAccent text-xl mb-4 group-hover:bg-brandAccent group-hover:text-black transition-all">
+                    <i class="fa-solid fa-database"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-2">Database Concepts</h3>
+                <p class="text-gray-400 text-xs leading-relaxed">
+                    Structuring, managing, cleaning, and querying datasets for optimal security, storage, and retrieval.
+                </p>
+            </div>
+
+            <!-- Skill 4 -->
+            <div class="glass-card p-6 rounded-2xl border border-white/10 hover:border-brandAccent transition-all group">
+                <div class="w-12 h-12 rounded-xl bg-brandAccent/20 flex items-center justify-center text-brandAccent text-xl mb-4 group-hover:bg-brandAccent group-hover:text-black transition-all">
+                    <i class="fa-solid fa-brain"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-2">Artificial Intelligence</h3>
+                <p class="text-gray-400 text-xs leading-relaxed">
+                    Leveraging AI algorithms and smart frameworks to automate processes and solve complex problems.
+                </p>
+            </div>
+
+            <!-- Skill 5 -->
+            <div class="glass-card p-6 rounded-2xl border border-white/10 hover:border-brandAccent transition-all group">
+                <div class="w-12 h-12 rounded-xl bg-brandAccent/20 flex items-center justify-center text-brandAccent text-xl mb-4 group-hover:bg-brandAccent group-hover:text-black transition-all">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-2">Machine Learning</h3>
+                <p class="text-gray-400 text-xs leading-relaxed">
+                    Developing data-driven models, pipelines, and cloud deployments on Google Cloud Platform.
+                </p>
+            </div>
+
+            <!-- Skill 6 -->
+            <div class="glass-card p-6 rounded-2xl border border-white/10 hover:border-brandAccent transition-all group">
+                <div class="w-12 h-12 rounded-xl bg-brandAccent/20 flex items-center justify-center text-brandAccent text-xl mb-4 group-hover:bg-brandAccent group-hover:text-black transition-all">
+                    <i class="fa-solid fa-chart-pie"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-2">Data Analysis</h3>
+                <p class="text-gray-400 text-xs leading-relaxed">
+                    Collecting, cleaning, validating, and interpreting complex datasets for strategic decision-making.
+                </p>
+            </div>
+
+            <!-- Skill 7 -->
+            <div class="glass-card p-6 rounded-2xl border border-white/10 hover:border-brandAccent transition-all group">
+                <div class="w-12 h-12 rounded-xl bg-brandAccent/20 flex items-center justify-center text-brandAccent text-xl mb-4 group-hover:bg-brandAccent group-hover:text-black transition-all">
+                    <i class="fa-solid fa-palette"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-2">Graphics & Media Design</h3>
+                <p class="text-gray-400 text-xs leading-relaxed">
+                    Creating posters, social media banners, brand artwork, and promotional materials for digital and print.
+                </p>
+            </div>
+
+            <!-- Skill 8 -->
+            <div class="glass-card p-6 rounded-2xl border border-white/10 hover:border-brandAccent transition-all group">
+                <div class="w-12 h-12 rounded-xl bg-brandAccent/20 flex items-center justify-center text-brandAccent text-xl mb-4 group-hover:bg-brandAccent group-hover:text-black transition-all">
+                    <i class="fa-solid fa-users-gear"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-2">Leadership & Photography</h3>
+                <p class="text-gray-400 text-xs leading-relaxed">
+                    Coordinating youth and university teams, capturing professional imagery, and managing digital outreach.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 4: PROFESSIONAL EXPERIENCE -->
+    <section id="experience" class="py-20 px-6 max-w-7xl mx-auto w-full border-t border-white/10">
+        <div class="text-center mb-16">
+            <span class="text-brandAccent font-bold uppercase tracking-widest text-xs">Work History</span>
+            <h2 class="text-3xl md:text-4xl font-extrabold mt-1 text-white">Professional Experience</h2>
+            <div class="w-16 h-1 bg-brandAccent mx-auto mt-3 rounded-full"></div>
+        </div>
+
+        <div class="space-y-8 relative before:absolute before:inset-0 before:left-4 md:before:left-1/2 before:-ml-px before:w-0.5 before:bg-white/10">
+            
+            <!-- Experience 1: P.C.E.A NYANGATI CHURCH -->
+            <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                <div class="flex items-center justify-center w-9 h-9 rounded-full bg-brandDark border-2 border-brandAccent text-brandAccent shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow-lg z-10">
+                    <i class="fa-solid fa-hands-holding-child text-xs"></i>
+                </div>
+                <div class="w-[calc(100%-2.5rem)] md:w-[calc(50%-2.5rem)] glass-card p-6 rounded-2xl border border-white/10 shadow-xl">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                        <span class="text-xs font-bold text-brandAccent tracking-wider uppercase bg-brandAccent/10 px-3 py-1 rounded-full">14th Dec 2025 – Present</span>
+                        <span class="text-xs text-gray-400"><i class="fa-solid fa-building mr-1"></i> P.C.E.A Nyangati Church</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">Vice-Chair Youth</h3>
+                    <ul class="mt-3 space-y-1.5 text-xs text-gray-300 list-disc list-inside leading-relaxed">
+                        <li>Provide strategic leadership, co-chairing meetings and coordinating youth outreach initiatives.</li>
+                        <li>Facilitate communication between youth members, departmental leadership, and ministry heads.</li>
+                        <li>Organize conferences, seminars, worship services, and mentorship programs for spiritual & personal growth.</li>
+                        <li>Participate in formulation and execution of annual work plans, activity schedules, and budgets.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Experience 2: Janta Cyber and Computer College -->
+            <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                <div class="flex items-center justify-center w-9 h-9 rounded-full bg-brandDark border-2 border-brandAccent text-brandAccent shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow-lg z-10">
+                    <i class="fa-solid fa-desktop text-xs"></i>
+                </div>
+                <div class="w-[calc(100%-2.5rem)] md:w-[calc(50%-2.5rem)] glass-card p-6 rounded-2xl border border-white/10 shadow-xl">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                        <span class="text-xs font-bold text-brandAccent tracking-wider uppercase bg-brandAccent/10 px-3 py-1 rounded-full">July 2025 – Jan 2026</span>
+                        <span class="text-xs text-gray-400"><i class="fa-solid fa-building mr-1"></i> Janta Cyber & Computer College</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">Cyber Attendant & IT Assistant</h3>
+                    <ul class="mt-3 space-y-1.5 text-xs text-gray-300 list-disc list-inside leading-relaxed">
+                        <li>Assisted clients in navigating government portals (eCitizen, KRA iTax, HELB, SHA/NHIF).</li>
+                        <li>Provided computer hardware/software troubleshooting, printing, scanning, and binding support.</li>
+                        <li>Taught basic computer classes and guided community members on digital literacy.</li>
+                        <li>Managed M-Pesa transactions, financial logs, stationery sales, and data privacy compliance.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Experience 3: Karatina University Nature Club -->
+            <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                <div class="flex items-center justify-center w-9 h-9 rounded-full bg-brandDark border-2 border-brandAccent text-brandAccent shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow-lg z-10">
+                    <i class="fa-solid fa-camera text-xs"></i>
+                </div>
+                <div class="w-[calc(100%-2.5rem)] md:w-[calc(50%-2.5rem)] glass-card p-6 rounded-2xl border border-white/10 shadow-xl">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                        <span class="text-xs font-bold text-brandAccent tracking-wider uppercase bg-brandAccent/10 px-3 py-1 rounded-full">March 2024 – March 2025</span>
+                        <span class="text-xs text-gray-400"><i class="fa-solid fa-leaf mr-1"></i> Karatina University</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">Official Photographer & IT Specialist</h3>
+                    <h4 class="text-lg font-bold font-italic text-white">Club Editor (Nature Club)</h4>
+                    <ul class="mt-3 space-y-1.5 text-xs text-gray-300 list-disc list-inside leading-relaxed">
+                        <li>Captured high-quality photography and videography for club trips and environmental drives.</li>
+                        <li>Managed social media outreach, designing event posters and promotional graphics.</li>
+                        <li>Maintained digital asset repositories and online event archives.</li>
+                    </ul>
+                </div>
+            </div>
+                 <!-- Experience 4: Murang'a County Women Sacco -->
+            <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                <div class="flex items-center justify-center w-9 h-9 rounded-full bg-brandDark border-2 border-brandOrange text-brandOrange shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow-lg z-10">
+                    <i class="fa-solid fa-database text-xs"></i>
+                </div>
+                <div class="w-[calc(100%-2.5rem)] md:w-[calc(50%-2.5rem)] glass-card p-6 rounded-2xl border border-white/10 shadow-xl">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                        <span class="text-xs font-bold text-brandAccent tracking-wider uppercase bg-brandAccent/10 px-3 py-1 rounded-full">June 2024 – August 2024</span>
+                        <span class="text-xs text-gray-400"><i class="fa-solid fa-building-columns mr-1"></i> Women Sacco</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">Attaché Student</h3>
+                    <ul class="mt-3 space-y-1.5 text-xs text-gray-300 list-disc list-inside leading-relaxed">
+                        <li>Cleaned, organized, and updated member databases to maintain high data reliability.</li>
+                        <li>Performed data analysis tasks (sorting, dataset validation) to support executive reporting.</li>
+                        <li>Troubleshot basic network issues and provided technical IT office support.</li>
+                    </ul>
+                </div>
+            </div>
+               <!-- Experience 5: Murang'a County Cooperative Dept -->
+            <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                <div class="flex items-center justify-center w-9 h-9 rounded-full bg-brandDark border-2 border-brandOrange text-brandOrange shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow-lg z-10">
+                    <i class="fa-solid fa-file-invoice-dollar text-xs"></i>
+                </div>
+                <div class="w-[calc(100%-2.5rem)] md:w-[calc(50%-2.5rem)] glass-card p-6 rounded-2xl border border-white/10 shadow-xl">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                        <span class="text-xs font-bold text-brandAccent tracking-wider uppercase bg-brandAccent/10 px-3 py-1 rounded-full">May 2024 – June 2024</span>
+                        <span class="text-xs text-gray-400"><i class="fa-solid fa-landmark mr-1"></i> County Govt (Kenol)</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">Attaché Student (Cooperative Dept)</h3>
+                    <ul class="mt-3 space-y-1.5 text-xs text-gray-300 list-disc list-inside leading-relaxed">
+                        <li>Assisted auditing teams in reviewing financial records and assessing regulatory compliance of Saccos.</li>
+                        <li>Prepared and updated databases for sub-county cooperatives to support monitoring.</li>
+                        <li>Helped compile cooperative performance reports for administrative audits.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: EDUCATION & CERTIFICATIONS -->
+    <section id="education" class="py-20 px-6 max-w-7xl mx-auto w-full border-t border-white/10">
+        <div class="text-center mb-16">
+            <span class="text-brandAccent font-bold uppercase tracking-widest text-xs">Academic Background</span>
+            <h2 class="text-3xl md:text-4xl font-extrabold mt-1 text-white">Education & Credentials</h2>
+            <div class="w-16 h-1 bg-brandAccent mx-auto mt-3 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Formal Education -->
+            <div class="glass-card p-8 rounded-3xl border border-white/10 shadow-xl">
+                <div class="flex items-center space-x-4 mb-6">
+                    <div class="w-12 h-12 rounded-2xl bg-brandAccent/20 flex items-center justify-center text-brandAccent text-xl border border-brandAccent/30">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white">Formal Education</h3>
+                        <p class="text-xs text-brandAccent">University Degree</p>
+                    </div>
+                </div>
+
+                <div class="border-l-2 border-brandAccent/50 pl-4 space-y-6">
+                    <div>
+                        <span class="text-xs font-bold text-blue-400 uppercase tracking-widest">Graduated 2025</span>
+                        <h4 class="text-lg font-extrabold text-white">Bachelor of Science in Computer Science</h4>
+                        <p class="text-xs text-gray-400 font-medium">Karatina University, Kenya</p>
+                        <p class="text-xs text-gray-300 mt-2 leading-relaxed">
+                            Comprehensive coursework covering software engineering, algorithms, database systems, artificial intelligence, networking, and data security.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Professional Certifications -->
+            <div class="glass-card p-8 rounded-3xl border border-white/10 shadow-xl">
+                <div class="flex items-center space-x-4 mb-6">
+                    <div class="w-12 h-12 rounded-2xl bg-blue-500/20 flex items-center justify-center text-blue-400 text-xl border border-blue-500/30">
+                        <i class="fa-solid fa-certificate"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white">Professional Certifications</h3>
+                        <p class="text-xs text-blue-400">Coursera & Industry Credentials</p>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-brandAccent transition-colors">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h4 class="text-sm font-bold text-white">Google Cloud Machine Learning</h4>
+                                <p class="text-xs text-gray-400">Coursera / Google Cloud</p>
+                            </div>
+                            <span class="text-[10px] bg-brandAccent/20 text-brandAccent font-bold px-2 py-0.5 rounded">Verified</span>
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-brandAccent transition-colors">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h4 class="text-sm font-bold text-white">Python Programming & Data Structures</h4>
+                                <p class="text-xs text-gray-400">Coursera Professional Certification</p>
+                            </div>
+                            <span class="text-[10px] bg-brandAccent/20 text-brandAccent font-bold px-2 py-0.5 rounded">Verified</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: CORE COMPETENCIES -->
+    <section id="competencies" class="py-20 px-6 max-w-7xl mx-auto w-full border-t border-white/10">
+        <div class="text-center mb-16">
+            <span class="text-brandAccent font-bold uppercase tracking-widest text-xs">Soft & Hard Skills</span>
+            <h2 class="text-3xl md:text-4xl font-extrabold mt-1 text-white">Core Competencies</h2>
+            <div class="w-16 h-1 bg-brandAccent mx-auto mt-3 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+            <div class="glass-card p-4 rounded-xl text-center hover:scale-105 transition-transform">
+                <i class="fa-solid fa-comments text-brandAccent text-2xl mb-2"></i>
+                <p class="text-xs font-bold text-white">Communication</p>
+            </div>
+            <div class="glass-card p-4 rounded-xl text-center hover:scale-105 transition-transform">
+                <i class="fa-solid fa-lightbulb text-brandAccent text-2xl mb-2"></i>
+                <p class="text-xs font-bold text-white">Problem Solving</p>
+            </div>
+            <div class="glass-card p-4 rounded-xl text-center hover:scale-105 transition-transform">
+                <i class="fa-solid fa-people-group text-brandAccent text-2xl mb-2"></i>
+                <p class="text-xs font-bold text-white">Team Leadership</p>
+            </div>
+            <div class="glass-card p-4 rounded-xl text-center hover:scale-105 transition-transform">
+                <i class="fa-solid fa-clock text-brandAccent text-2xl mb-2"></i>
+                <p class="text-xs font-bold text-white">Time Management</p>
+            </div>
+            <div class="glass-card p-4 rounded-xl text-center hover:scale-105 transition-transform">
+                <i class="fa-solid fa-shield-halved text-brandAccent text-2xl mb-2"></i>
+                <p class="text-xs font-bold text-white">Data Ethics</p>
+            </div>
+            <div class="glass-card p-4 rounded-xl text-center hover:scale-105 transition-transform">
+                <i class="fa-solid fa-wand-magic-sparkles text-brandAccent text-2xl mb-2"></i>
+                <p class="text-xs font-bold text-white">Creativity</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 7: CONTACT ME -->
+    <section id="contact" class="py-20 px-6 max-w-7xl mx-auto w-full border-t border-white/10">
+        <div class="text-center mb-16">
+            <span class="text-brandAccent font-bold uppercase tracking-widest text-xs">Let's Connect</span>
+            <h2 class="text-3xl md:text-4xl font-extrabold mt-1 text-white">Get In Touch</h2>
+            <div class="w-16 h-1 bg-brandAccent mx-auto mt-3 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Contact Info -->
+            <div class="lg:col-span-5 glass-card p-8 rounded-3xl border border-white/10 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-6">Contact Information</h3>
+                    <div class="space-y-6 text-sm">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-10 h-10 rounded-xl bg-brandAccent/20 flex items-center justify-center text-brandAccent shrink-0">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-400 uppercase font-semibold">Phone</p>
+                                <a href="tel:+254723110915" class="text-white hover:text-brandAccent transition-colors font-bold">+254 723 110 915</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-4">
+                            <div class="w-10 h-10 rounded-xl bg-brandAccent/20 flex items-center justify-center text-brandAccent shrink-0">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-400 uppercase font-semibold">Email</p>
+                                <a href="mailto:kamandem76@gmail.com" class="text-white hover:text-brandAccent transition-colors font-bold">kamandem76@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-4">
+                            <div class="w-10 h-10 rounded-xl bg-brandAccent/20 flex items-center justify-center text-brandAccent shrink-0">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-400 uppercase font-semibold">Location</p>
+                                <p class="text-white font-bold">Murang'a, Kenya</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-8 border-t border-white/10">
+                    <p class="text-xs text-gray-400 mb-3 font-semibold">Open for full-time opportunities, tech consultation & freelance projects.</p>
+                </div>
+            </div>
+
+            <!-- Simple Form -->
+            <div class="lg:col-span-7 glass-card p-8 rounded-3xl border border-white/10">
+                <form action="mailto:kamandem76@gmail.com" method="post" enctype="text/plain" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-2">Your Name</label>
+                        <input type="text" name="name" required class="w-full bg-brandDark/80 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brandAccent text-sm" placeholder="John Doe">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-2">Your Email</label>
+                        <input type="email" name="email" required class="w-full bg-brandDark/80 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brandAccent text-sm" placeholder="john@example.com">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-2">Message</label>
+                        <textarea name="message" rows="4" required class="w-full bg-brandDark/80 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brandAccent text-sm" placeholder="How can I help you?"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-brandAccent hover:bg-brandAccentHover text-black font-black py-3.5 rounded-xl transition-all shadow-lg shadow-brandAccent/20 text-sm uppercase tracking-wider">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="w-full py-8 px-6 border-t border-white/10 bg-brandDark text-center text-xs text-gray-400">
+        <p>&copy; 2026 Morris Wanyoike Kamande. All Rights Reserved.</p>
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT -->
+    <script>
+        // Mobile Navigation Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            if (mobileMenu.classList.contains('hidden')) {
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars');
+            } else {
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-xmark');
+            }
+        });
+
+        // Close mobile menu when clicking links
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars');
+            });
+        });
+
+        // Scroll Helper
+        function scrollToSection(id) {
+            const section = document.getElementById(id);
+            if(section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    </script>
+</body>
+</html>
